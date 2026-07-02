@@ -39,32 +39,30 @@ cd sauce-demo-automation
 - ``` pip install behave ```
 
 
-
-
-meu_projeto_de_testes/
-├── features/                   # Arquivos .feature (Gherkin) e steps do Behave
+sauce-demo-selenium-automation/
+├── features/                   # .feature (Gherkin) files and steps from Behave
 │   ├── login.feature
 │   ├── cadastro.feature
 │   └── steps/
 │       ├── login_steps.py
 │       └── cadastro_steps.py
-├── pages/                      # Page Objects (POM): elementos e ações de cada página [citation:1][citation:2][citation:3]
+├── pages/                      # Page Objects (POM): elements and actions from each page
 │   ├── login_page.py
 │   ├── home_page.py
 │   └── base_page.py
-├── tests/                      # Testes com pytest (para testes mais técnicos, se houver) [citation:1][citation:2][citation:3]
+├── tests/                      # Tests with pytest
 │   ├── test_login.py
 │   └── test_cadastro.py
-├── utilities/                  # Funções auxiliares reutilizáveis [citation:1][citation:3][citation:4]
+├── utilities/                  # Funções auxiliares reutilizáveis
 │   ├── driver_manager.py
 │   ├── config_reader.py
 │   └── logger.py
-├── configs/                    # Arquivos de configuração (URLs, credenciais, etc.) [citation:3][citation:5]
+├── configs/                    # Configuration files (URLs, credentiais, etc.) 
 │   └── config.ini
-├── reports/                    # Relatórios de teste (HTML, Allure, etc.) [citation:1][citation:3][citation:4]
+├── reports/                    # Test reports (HTML, Allure, etc.)
 │   └── report.html
-├── screenshots/                # Screenshots capturados em caso de falha [citation:1][citation:3][citation:4]
-├── conftest.py                 # Fixtures globais do pytest [citation:2][citation:4][citation:5]
-├── environment.py              # Hooks de configuração do Behave (before_all, after_all) [citation:5]
-├── pytest.ini                  # Configurações do pytest (markers, etc.) [citation:3][citation:4][citation:5]
-└── requirements.txt            # Dependências do projeto
+├── screenshots/                # Screenshots fom fails
+├── conftest.py                 # Globals Fixtures from pytest
+├── environment.py              # Hooks configuration from Behave (before_all, after_all)
+├── pytest.ini                  # Pytest configurations (markers, etc.)
+└── requirements.txt            # Project dependencies
