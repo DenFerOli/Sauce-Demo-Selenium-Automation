@@ -1,12 +1,18 @@
 # Sauce Demo Selenium Automation
 
-Test automation project using **Selenium WebDriver**, **Behave** (Cucumber para Python) and **pytest**.
+Test automation project for [Sauce Demo] **Selenium WebDriver**, **Behave** (Cucumber para Python) and **pytest**.
 
 
 ## 📦 Requirements
 
 - Python 3.8 or superior
 - Git
+
+
+![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)
+![pytest](https://img.shields.io/badge/pytest-7.0+-green.svg)
+![Behave](https://img.shields.io/badge/behave-1.2+-orange.svg)
+![Selenium](https://img.shields.io/badge/selenium-4.0+-red.svg)
 
 ## 🚀 Installation and configuratio 
 
@@ -42,18 +48,19 @@ cd sauce-demo-automation
 sauce-demo-selenium-automation/
 ├── features/                   # .feature (Gherkin) files and steps from Behave
 │   ├── login.feature
-│   ├── cadastro.feature
+│   ├── checkout.feature
 │   └── steps/
 │       ├── login_steps.py
-│       └── cadastro_steps.py
+│       └── checkout_steps.py
 ├── pages/                      # Page Objects (POM): elements and actions from each page
 │   ├── login_page.py
 │   ├── home_page.py
+│   ├── checkout_page.py
 │   └── base_page.py
 ├── tests/                      # Tests with pytest
 │   ├── test_login.py
-│   └── test_cadastro.py
-├── utilities/                  # Funções auxiliares reutilizáveis
+│   └── test_checkout.py
+├── utilities/                  # Reusable helper functions
 │   ├── driver_manager.py
 │   ├── config_reader.py
 │   └── logger.py
