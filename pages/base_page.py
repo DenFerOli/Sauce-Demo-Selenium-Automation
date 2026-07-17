@@ -1,4 +1,5 @@
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from configs.settings import DEFAULT_TIMEOUT, BASE_URL, SCREENSHOTS_DIR
@@ -11,6 +12,21 @@ class BasePage:
         self.base_url = BASE_URL
         self.timeout = DEFAULT_TIMEOUT
     
+    def find_element(self, locator):
+        return self.driver.find_element(*locator)
+
+    def find_elements(self, locator):
+        return self.driver.find_elements(*locator)
+
+    def type_text(self, locator, text):
+        self.find_element(locator).send_keys(text)
+
+    def click(self, locator):
+        self.find_element(locator).click()
+
+    
+
+
     def open(self, url=''):
         full_url = self.base_url + url
         self.driver.get(full_url)
