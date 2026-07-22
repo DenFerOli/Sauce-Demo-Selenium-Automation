@@ -11,4 +11,6 @@ from pages.login_page import LoginPage
 #         assert 
 
 
-class TestLogin
+class TestLogin:
+    def test_sd001_valid_login(self):
+        
