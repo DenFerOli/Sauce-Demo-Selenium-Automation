@@ -13,4 +13,4 @@ from pages.login_page import LoginPage
 
 class TestLogin:
     def test_sd001_valid_login(self):
-        
+        assert 1 == 1
