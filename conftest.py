@@ -17,7 +17,7 @@ def driver():
     driver = webdriver.Chrome(service=service, options=options)
     driver.implicitly_wait(10)
 
-    yield
+    yield driver  # <-- CORRIGIDO: agora retorna o driver
 
     # teardown
     driver.quit()
