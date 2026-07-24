@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_URL = 'https://www.saucedemo.com/'
 
-DEAFAULT_TIMEOUT = 10
+DEFAULT_TIMEOUT = 10
 IMPLICIT_WAIT = 5
 PAGE_LOAD_TIMEOUT = 30
 PAGE_LOAD_STRATEGY = 'normal'
