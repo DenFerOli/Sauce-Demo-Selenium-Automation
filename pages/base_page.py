@@ -24,9 +24,6 @@ class BasePage:
     def click_on_element(self, locator):
         self.find_element(locator).click()
 
-
-
-
     def open_url(self, url=''):
         full_url = self.base_url + url
         self.driver.get(full_url)
