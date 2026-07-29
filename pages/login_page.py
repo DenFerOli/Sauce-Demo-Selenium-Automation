@@ -6,7 +6,7 @@ class LoginPage(BasePage):
     USERNAME_INPUT = (By.ID, 'user-name')
     PASSWORD_INPUT = (By.ID, 'password')
     LOGIN_BUTTON = (By.ID, 'login-button')
-    ERROR_MESSAGE = (By.XPATH, '//div[@class="error-message-container error"]//h3')  # Alterado para pegar o texto correto
+    ERROR_MESSAGE = (By.XPATH, '//div[@class="error-message-container error"]//h3') 
 
     username = "standard_user"
     password = "secret_sauce"
@@ -51,7 +51,6 @@ class LoginPage(BasePage):
 
     def get_error_message(self):
         try:
-            # Aguarda o elemento de erro aparecer (opcional, mas recomendado)
             from selenium.webdriver.support.ui import WebDriverWait
             from selenium.webdriver.support import expected_conditions as EC
             
