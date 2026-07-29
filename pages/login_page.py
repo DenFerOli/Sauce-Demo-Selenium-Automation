@@ -6,7 +6,7 @@ class LoginPage(BasePage):
     USERNAME_INPUT = (By.ID, 'user-name')
     PASSWORD_INPUT = (By.ID, 'password')
     LOGIN_BUTTON = (By.ID, 'login-button')
-    ERROR_MESSAGE = (By.XPATH, '//button[@data-test="error-button"]')
+    ERROR_MESSAGE = (By.XPATH, '//div[@class="error-message-container error"]//h3')  # Alterado para pegar o texto correto
 
     username = "standard_user"
     password = "secret_sauce"
@@ -28,8 +28,36 @@ class LoginPage(BasePage):
         self.click_on_element(self.LOGIN_BUTTON)
         return self
 
+    def invalid_login_no_username(self):
+        self.open_url()
+        self.type_text(self.USERNAME_INPUT, "")
+        self.type_text(self.PASSWORD_INPUT, "test")
+        self.click_on_element(self.LOGIN_BUTTON)
+        return self
+
+    def invalid_login_no_password(self):
+        self.open_url()
+        self.type_text(self.USERNAME_INPUT, "test")
+        self.type_text(self.PASSWORD_INPUT, "")
+        self.click_on_element(self.LOGIN_BUTTON)
+        return self
+
+    def locked_out_user(self):
+        self.open_url()
+        self.type_text(self.USERNAME_INPUT, "locked_out_user")
+        self.type_text(self.PASSWORD_INPUT, "secret_sauce")
+        self.click_on_element(self.LOGIN_BUTTON)
+        return self
+
     def get_error_message(self):
         try:
-            return self.driver.find_element(*self.ERROR_MESSAGE).text
+            # Aguarda o elemento de erro aparecer (opcional, mas recomendado)
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            
+            error_element = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(self.ERROR_MESSAGE)
+            )
+            return error_element.text
         except:
             return None
