@@ -49,7 +49,7 @@ class ProductsPage(BasePage):
             return True
 
     def get_cart_items_count(self):
-        cart_items = self.find_elements(*self.cart_item)
+        cart_items = self.driver.find_elements(*self.cart_item)
         return len(cart_items)
 
     def get_cart_title_text(self):
