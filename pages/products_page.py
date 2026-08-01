@@ -8,6 +8,8 @@ class ProductsPage(BasePage):
     sauce_labs_backpack_add_to_cart_button = (By.ID, 'add-to-cart-sauce-labs-backpack')
     shopping_cart_link = (By.CLASS_NAME, 'shopping_cart_link')
     cart_title = (By.XPATH, "//span[@class='title' and @data-test='title' and text()='Your Cart']")
+    remove_button = (By.ID, 'remove-sauce-labs-backpack')
+    inventory_name = (By.CLASS_NAME, 'inventory_item_name')
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -21,6 +23,16 @@ class ProductsPage(BasePage):
         self.click_on_element(self.shopping_cart_link)
         
         return self
+
+    def remove_product_from_cart(self):
+        self.wait_for_element(self.shopping_cart_link)
+        self.click_on_element(self.shopping_cart_link)
+        self.wait_for_element(self.remove_button)
+        self.click_on_element(self.remove_button)
+        self.
+
+        return self
+
 
     def get_cart_title_text(self):
         element = self.wait_for_element(self.cart_title)
