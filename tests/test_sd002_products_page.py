@@ -15,4 +15,11 @@ class TestProducts:
 
         assert cart_message == expected_message, f"Expected message: '{expected_message}', but receive: '{cart_message}'"
 
+    def test_sd003_remove_product(self, driver):
+        products_page = ProductsPage(driver)
+        products_page.add_product_to_cart()
+        assert products_page.get_cart_items_count() == 1, "Expected 1 item in the cart after adding a product."
+        products_page.remove_product_from_cart()
+        assert products_page.get_cart_items_count() == 0, "Expected 0 items in the cart after removing the product."
+
 # python -m pytest -v tests/test_sd002_products_page.py
