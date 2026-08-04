@@ -3,6 +3,7 @@ from pages.base_page import BasePage
 from pages.login_page import LoginPage
 from configs.settings import BASE_URL
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+import time
 
 class ProductsPage(BasePage):
 
@@ -39,13 +40,19 @@ class ProductsPage(BasePage):
         return self
 
     def add_all_products_to_cart(self):
-        login_page = LoginPage(self.driver)
-        login_page.login("standard_user", "secret_sauce")
 
         for product in self.products_list:
             add_to_cart_button = (By.ID, product)
-            self.wait_for_element(add_to_cart_button)
-            self.click_on_element(add_to_cart_button)
+            try:
+                self.wait_for_element(add_to_cart_button, timeout=5)
+                self.click_on_element(add_to_cart_button)
+                time.sleep(0.3)
+            except TimeoutException:
+                print(f"Error: Could not add product with ID '{product}': {e}")
+                raise
+            
+ 
+            
 
     def remove_product_from_cart(self):
 
