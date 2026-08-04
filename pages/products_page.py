@@ -69,9 +69,14 @@ class ProductsPage(BasePage):
             return True
 
     def get_cart_items_count(self):
-        cart_items = self.driver.find_elements(*self.cart_item)
-        return len(cart_items)
-
+        # cart_items = self.driver.find_elements(*self.cart_item)
+        # return len(cart_items)
+        try:
+            badge = self.driver.find_element(By.CLASS_NAME, 'shopping_cart_badge')
+            return int(badge.text)
+        except NoSuchElementException:
+            return 0
+        
     def get_cart_title_text(self):
         element = self.wait_for_element(self.cart_title)
         return element.text
