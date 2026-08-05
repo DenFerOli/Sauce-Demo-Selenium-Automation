@@ -11,6 +11,7 @@ class BasePage:
         self.driver = driver
         self.base_url = BASE_URL
         self.timeout = DEFAULT_TIMEOUT
+        self.wait = WebDriverWait(driver, DEFAULT_TIMEOUT)
     
     def find_element(self, locator):
         return self.driver.find_element(*locator)

@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # ⚠️ ADICIONE ESTA LINHA
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
 from configs.settings import BASE_URL
@@ -9,11 +10,11 @@ class ProductsPage(BasePage):
 
     products_list = [
         "add-to-cart-sauce-labs-backpack",
-"add-to-cart-sauce-labs-bike-light",
-"add-to-cart-sauce-labs-bolt-t-shirt",
-"add-to-cart-sauce-labs-fleece-jacket",
-"add-to-cart-sauce-labs-onesie",
-"add-to-cart-test.allthethings()-t-shirt-(red)"
+        "add-to-cart-sauce-labs-bike-light",
+        "add-to-cart-sauce-labs-bolt-t-shirt",
+        "add-to-cart-sauce-labs-fleece-jacket",
+        "add-to-cart-sauce-labs-onesie",
+        "add-to-cart-test.allthethings()-t-shirt-(red)"
     ]
 
     sauce_labs_backpack_add_to_cart_button = (By.ID, products_list[0])
@@ -23,8 +24,6 @@ class ProductsPage(BasePage):
     cart_item = (By.CLASS_NAME, 'cart_item')
     cart_item_name = (By.CLASS_NAME, 'inventory_item_name')
     cart_remove_button = (By.ID, 'remove-sauce-labs-backpack')
-
-
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -36,29 +35,40 @@ class ProductsPage(BasePage):
         self.click_on_element(self.sauce_labs_backpack_add_to_cart_button)
         self.wait_for_element(self.shopping_cart_link)
         self.click_on_element(self.shopping_cart_link)
-        
         return self
 
-    def add_all_products_to_cart(self):
-
+        """Adiciona todos os produtos ao carrinho"""
+        self.wait_for_element((By.CLASS_NAME, "inventory_list"), timeout=10)
+        
         for product in self.products_list:
             add_to_cart_button = (By.ID, product)
             try:
-                self.wait_for_element(add_to_cart_button, timeout=5)
+                self.wait.until(EC.element_to_be_clickable(add_to_cart_button))
                 self.click_on_element(add_to_cart_button)
-                time.sleep(0.3)
-            except TimeoutException:
-                print(f"Error: Could not add product with ID '{product}': {e}")
+                time.sleep(0.2) 
+            except TimeoutException as ex:
+                print(f"❌ Timeout: Could not add product with ID '{product}'")
+                try:
+                    alt_button = self.driver.find_element(By.XPATH, 
+                        f"//button[contains(@data-test, 'add-to-cart') and contains(@id, '{product}')]")
+                    alt_button.click()
+                    print(f"✅ Added via alternative selector: {product}")
+                except Exception as alt_ex:
+                    print(f"❌ Alternative also failed for {product}: {alt_ex}")
+                    raise
+            except Exception as ex:
+                print(f"❌ Unexpected error with {product}: {ex}")
                 raise
-            
- 
-            
+
+        try:
+            badge = self.driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
+            print(f"✅ Cart has {badge.text} items after adding all products.")
+        except:
+            print("⚠️ No items in the cart (badge not found)")
 
     def remove_product_from_cart(self):
-
         self.wait_for_element(self.cart_remove_button)
         self.click_on_element(self.cart_remove_button)
-
         return self
 
     def is_element_present(self, locator, timeout=2):
@@ -76,8 +86,6 @@ class ProductsPage(BasePage):
             return True
 
     def get_cart_items_count(self):
-        # cart_items = self.driver.find_elements(*self.cart_item)
-        # return len(cart_items)
         try:
             badge = self.driver.find_element(By.CLASS_NAME, 'shopping_cart_badge')
             return int(badge.text)
@@ -85,7 +93,6 @@ class ProductsPage(BasePage):
             return 0
         
     def get_cart_title_text(self):
+
         element = self.wait_for_element(self.cart_title)
         return element.text
-
-    

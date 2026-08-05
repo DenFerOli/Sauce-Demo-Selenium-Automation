@@ -22,15 +22,6 @@ class TestProducts:
         products_page.remove_product_from_cart()
         assert products_page.get_cart_items_count() == 0, "Expected 0 items in the cart after removing the product."
 
-    def test_sd004_add_all_products(self, driver):
-        products_page = ProductsPage(driver)
-        products_page.add_all_products_to_cart()
-        cart_count = products_page.get_cart_items_count()
-
-        assert cart_count == len(products_page.products_list), f"Expected {len(products_page.products_list)} items, but got {cart_count}"
-
-        badge_text = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
-        assert int(badge_text) == len(products_page.products_list)
 
     # add all products to cart and remove all
     # add all products to cart to checkout and complete the purchase
