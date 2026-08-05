@@ -22,6 +22,7 @@ class TestProducts:
         products_page.remove_product_from_cart()
         assert products_page.get_cart_items_count() == 0, "Expected 0 items in the cart after removing the product."
 
+    
 
     # add all products to cart and remove all
     # add all products to cart to checkout and complete the purchase
