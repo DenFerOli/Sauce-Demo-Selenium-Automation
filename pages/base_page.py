@@ -45,4 +45,7 @@ class BasePage:
         filepath = os.path.join(SCREENSHOTS_DIR, f"{name}.png")
         self.driver.save_screenshot(filepath)
         return filepath
-    
+
+    def get_text(self, locator):
+        element = self.wait_for_element(locator)
+        return element.text
