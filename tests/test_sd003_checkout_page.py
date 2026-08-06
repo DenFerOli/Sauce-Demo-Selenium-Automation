@@ -10,8 +10,8 @@ class TestCheckout:
     def test_sd001_fill_checkout_form(self, driver):
         fill_checkout = CheckoutPage(driver)
         fill_checkout.fill_checkout_form()
-        checkout_text = fill_checkout.get_text(By.CLASS_NAME, "title")
-        expected_text = "Checkout: Your Information"
+        checkout_text = fill_checkout.get_text((By.CLASS_NAME, "title"))
+        expected_text = "Checkout: Overview"
 
         assert checkout_text == expected_text, f"Expected text: '{expected_text}', but receive: '{checkout_text}'"
 

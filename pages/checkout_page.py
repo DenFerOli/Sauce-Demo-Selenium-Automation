@@ -18,7 +18,7 @@ class CheckoutPage(BasePage):
     def fill_checkout_form(self):
         self.open_url()
         products_page = ProductsPage(self.driver)
-        products_page.add_product_to_cart(self)
+        products_page.add_product_to_cart()
         self.click_on_element(self.CHECKOUT_BUTTON)
         self.type_text(self.FIRST_NAME_INPUT, "First")
         self.type_text(self.LAST_NAME_INPUT, "Last")
