@@ -15,4 +15,16 @@ class TestCheckout:
 
         assert checkout_text == expected_text, f"Expected text: '{expected_text}', but receive: '{checkout_text}'"
 
+    def test_sd002_complete_checkout(self, driver):
+        complete_checkout = CheckoutPage(driver)
+        complete_checkout.complete_checkout()
+        finish_text = complete_checkout.get_text((By.CLASS_NAME, "title"))
+        expected_text = "Checkout: Complete!"
+
+        assert finish_text == expected_text, f"Expected text: '{expected_text}', but receiver: '{finish_text}'"
+
+#to verify the sum of the values
+
+
+
 #python -m pytest -v tests/test_sd003_checkout_page.py
